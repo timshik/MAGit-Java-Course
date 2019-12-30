@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox minWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.UI.MagitController">
+   <children>
+      <MenuBar fx:id="MenuBarFx">
+        <menus>
+          <Menu fx:id="MenuRepositoryfx" mnemonicParsing="false" text="repository">
+            <items>
+              <MenuItem fx:id="MenuItemNewRepositoryFx" mnemonicParsing="false" onAction="#CreateNewRepository" text="create new repository" />
+                  <MenuItem fx:id="MenuItemSwitchRepositoryFx" mnemonicParsing="false" onAction="#SwitchRepository" text="switch active repository" />
+                  <MenuItem fx:id="MenuItemImportFx" mnemonicParsing="false" onAction="#ImportRepositoryFromXml" text="import repository" />
+                  <MenuItem fx:id="MenuItemExitFx" mnemonicParsing="false" onAction="#Exit" text="exit" />
+            </items>
+          </Menu>
+          <Menu fx:id="MenuEditFx" mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem fx:id="MenuItemChangeUserNameFx" mnemonicParsing="false" onAction="#ChangeUserName" text="cahnge user name" />
+                  <MenuItem fx:id="animationMenuItem" mnemonicParsing="false" onAction="#Animation" text="animation (activated)" />
+            </items>
+          </Menu>
+          <Menu fx:id="MenuViewFx" mnemonicParsing="false" text="collabaration">
+            <items>
+                  <MenuItem fx:id="menuItemClone" mnemonicParsing="false" onAction="#clone" text="clone" />
+              <MenuItem fx:id="menuItemFetch" mnemonicParsing="false" onAction="#Fetch" text="fetch" />
+                  <MenuItem fx:id="menuItemPull" mnemonicParsing="false" onAction="#pull" text="pull" />
+                  <MenuItem fx:id="menuItemPush" mnemonicParsing="false" onAction="#Push" text="push" />
+            </items>
+          </Menu>
+            <Menu fx:id="MenuBranchesFx" mnemonicParsing="false" text="branches">
+              <items>
+                  <MenuItem fx:id="MenuItemAddBranchFx" mnemonicParsing="false" onAction="#AddBranch" text="add branch" />
+                <MenuItem fx:id="MenuItemDeleteBranchFx" mnemonicParsing="false" onAction="#DeleteBrunch" text="delete branch" />
+                  <MenuItem fx:id="MenuItemCheckoutBranch" mnemonicParsing="false" onAction="#CheckoutBranch" text="checkout branch" />
+                  <MenuItem fx:id="MenuItemResetActiveBranchFx" mnemonicParsing="false" onAction="#SwitchActiveBranch" text="reset active branch" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <ToolBar prefHeight="36.0" prefWidth="600.0">
+         <items>
+            <HBox spacing="50.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="85.0" text="Checkout:" />
+                        <ChoiceBox fx:id="ChoiceBoxFx" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <ColorPicker fx:id="ComboBoxMasterFx" onAction="#setOnCssTimeChanges" />
+                  <Button fx:id="showStatusButton" accessibleRole="IMAGE_VIEW" ellipsisString="dsd" mnemonicParsing="false" onAction="#ShowStatus" prefHeight="26.0" prefWidth="122.0" text="commit" textOverrun="CLIP">
+                     <textFill>
+                        <LinearGradient endX="0.9274809305904476" endY="1.0" startX="0.8854962669256079" startY="0.20992373692170355">
+                           <stops>
+                              <Stop color="#14125e" />
+                              <Stop color="#14125e" offset="0.007633587786259542" />
+                              <Stop color="#3ebf21" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <effect>
+                        <InnerShadow color="#0e0e0e" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="mergeButton" mnemonicParsing="false" onAction="#merge" prefHeight="31.0" prefWidth="121.0" text="merge" />
+               </children>
+            </HBox>
+         </items>
+      </ToolBar>
+      <AnchorPane prefHeight="539.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+         <children>
+            <SplitPane dividerPositions="0.29797979797979796" layoutX="77.0" layoutY="117.0" prefHeight="539.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <VBox fx:id="commitTreeVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="commitTreeButton" mnemonicParsing="false" onAction="#ChangeCommitTreeStatus" prefHeight="31.0" prefWidth="266.0" text="commit tree ( not Full)" />
+                              <ScrollPane fx:id="branchNameScrollPane" fitToWidth="true" vbarPolicy="NEVER">
+                                 <content>
+                                    <AnchorPane>
+                                       <children>
+                                          <HBox fx:id="branchMap" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <ScrollPane VBox.vgrow="ALWAYS">
+                                <content>
+                                  <AnchorPane fx:id="commitTreeScrollPane" />
+                                </content>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ScrollPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <SplitPane dividerPositions="0.9364485981308411" layoutX="7.0" layoutY="470.0" orientation="VERTICAL" prefHeight="537.6" prefWidth="557.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="556.0">
+                                 <children>
+                                    <SplitPane dividerPositions="0.6549586776859504" layoutX="104.0" layoutY="213.0" orientation="VERTICAL" prefHeight="486.0" prefWidth="554.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <items>
+                                        <AnchorPane minHeight="100.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                             <children>
+                                                <TableView fx:id="TableViewFx" layoutX="143.0" layoutY="120.0" onMousePressed="#SetDetailsOfCommitAndBranch" prefHeight="378.0" prefWidth="552.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="branchColumnFx" prefWidth="75.0" text="branch" />
+                                                    <TableColumn fx:id="noteColumnFx" prefWidth="220.0" text="note" />
+                                                      <TableColumn fx:id="dateColumnFx" minWidth="0.0" prefWidth="117.0" text="update date" />
+                                                      <TableColumn fx:id="shawanColumnFx" prefWidth="122.0" text="sha-1" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="175.0" minWidth="0.0" prefHeight="151.0" prefWidth="517.0">
+                                             <children>
+                                                <TabPane layoutX="79.0" layoutY="45.0" prefHeight="252.0" prefWidth="552.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <tabs>
+                                                    <Tab text="content">
+                                                         <content>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <TextFlow fx:id="contentTextFlow" layoutY="-51.0" prefHeight="149.0" prefWidth="552.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                    <Tab text="files tree of the commit">
+                                                         <content>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <TreeView fx:id="filesTreeOfTheCmmitTreeView" layoutX="88.0" layoutY="-72.0" onMouseClicked="#ShowFile" prefHeight="128.0" prefWidth="552.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                      <Tab text="History of branch">
+                                                        <content>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <AnchorPane layoutX="256.0" layoutY="-50.0" prefHeight="128.0" prefWidth="552.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <ListView fx:id="historyOfBranchTableView" layoutX="48.0" layoutY="-53.0" prefHeight="128.0" prefWidth="552.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                        </content>
+                                                      </Tab>
+                                                      <Tab text="delta">
+                                                        <content>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <TabPane prefHeight="135.0" prefWidth="622.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                    <tabs>
+                                                                      <Tab text="first prev commit">
+                                                                        <content>
+                                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="533.0">
+                                                                                 <children>
+                                                                                    <ListView fx:id="firstDeltaListView" layoutX="35.0" layoutY="-67.0" prefHeight="96.0" prefWidth="622.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                        </content>
+                                                                      </Tab>
+                                                                      <Tab text="second prev commit">
+                                                                        <content>
+                                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                                 <children>
+                                                                                    <ListView fx:id="secondDeltaListView" layoutX="39.0" layoutY="-74.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="96.0" prefWidth="622.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                        </content>
+                                                                      </Tab>
+                                                                    </tabs>
+                                                                  </TabPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                        </content>
+                                                      </Tab>
+                                                  </tabs>
+                                                </TabPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane maxHeight="45.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Label fx:id="repoNameLabel" layoutX="9.0" layoutY="6.0" prefHeight="21.0" prefWidth="164.0" />
+                                    <Separator layoutX="177.0" layoutY="1.0" orientation="VERTICAL" prefHeight="30.0" prefWidth="6.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="177.0" AnchorPane.topAnchor="1.0" />
+                                    <Label fx:id="repoPathLabel" layoutX="194.0" layoutY="4.0" prefHeight="21.0" prefWidth="422.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

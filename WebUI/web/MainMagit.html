@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link  rel="stylesheet" type="text/css" href =css/fontawesome.css>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: url(mainBackground.jpg);
+        }
+
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .subnav {
+            float: left;
+            overflow: hidden;
+        }
+
+        .subnav .subnavbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .subnav:hover .subnavbtn {
+            background-color: red;
+        }
+
+        .subnav-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            background-color: red;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .subnav-content a {
+            float: left;
+            color: white;
+            text-decoration: none;
+        }
+
+        .subnav-content a:hover {
+            background-color: #eee;
+            color: black;
+        }
+
+        .subnav:hover .subnav-content {
+            display: block;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 100px 50px;
+            -fx-effect           : dropshadow(two-pass-box, rgba(0, 0, 0, 0.3), 2, 0, -2, 2);
+
+        }
+
+
+        .box{
+            content: "\25B6";
+            position: absolute;
+            top: 22.5%;
+            left: 15%;
+            transform: translate(-15%,-15%);
+        }
+        .label{
+            position: absolute;
+            top: 22.5%;
+            left: 7%;
+            transform: translate(-15%,-15%);
+        }
+        .box select{
+            background: darkblue;
+            color: white;
+            padding: 10px;
+            width: 250px;
+            height: 50px;
+            border: none;
+            font-size: 20px;
+            box-shadow: 0 5px 25px rgba(255,255,255,.5) ;
+            -webkit-appearance: listbox;
+            outline: none;
+        }
+
+        .box:hover{
+            background: blueviolet;
+        }
+
+        .button4 {border-radius: 50px;
+
+            position: absolute;
+            right: 50px;
+            background-color: #fb2525;
+            width: 200px;
+
+
+        }
+        .button5 {border-radius: 50px;
+
+            position: absolute;
+            right: 350px;
+            background-color: #8b9fff;
+            width: 200px;
+        }
+        table {
+            position: absolute;
+            top: 45%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 50%;
+            right: 0;
+
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        tr:nth-child(odd){
+            background-color: darkorchid;
+        }
+        .tab {
+           width: 50%;
+            position: absolute;
+            top: 45%;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: darkorchid;
+
+        }
+        .tab1{
+            left: 0%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: darkorchid;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            top: 45%;
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            background-color: darkorchid;
+
+        }
+        .tab1 button{
+            top: 0;
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            background-color: darkorchid;
+        }
+        .tab1 button:hover{
+            background-color: #ddd;
+        }
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            width: 48.5%;
+            position: absolute;
+            top: 52%;
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: #8b9fff;
+        }
+        .tabcontent1{
+            width: 100%;
+            position: absolute;
+            top: 0;
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: #8b9fff;
+        }
+        ul, #myUL {
+            list-style-type: none;
+        }
+
+        #myUL {
+            margin: 0;
+            padding: 0;
+        }
+
+        .caret {
+            cursor: pointer;
+            -webkit-user-select: none; /* Safari 3.1+ */
+            -moz-user-select: none; /* Firefox 2+ */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none;
+        }
+
+        .caret::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .caret-down::before {
+            -ms-transform: rotate(90deg); /* IE 9 */
+            -webkit-transform: rotate(90deg); /* Safari */'
+        transform: rotate(90deg);
+        }
+
+        .nested {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+
+
+<div class="navbar">
+    <a href="#home">Home</a>
+    <div class="subnav">
+
+        <button class="subnavbtn">repository <i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+            <a href="#create">create new repository</a>
+            <a href="#switch">switch active repository</a>
+            <a href="#import">import repository</a>
+            <a href="#exit"> Exit</a>
+        </div>
+    </div>
+    <div class="subnav">
+        <button class="subnavbtn">edit <i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+            <a href="#chengeusername">change user name</a>
+        </div>
+    </div>
+    <div class="subnav">
+        <button class="subnavbtn">collaboration <i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+            <a href="#clone">clone</a>
+            <a href="#fetch">fetch</a>
+            <a href="#pull">pull</a>
+            <a href="#push">push</a>
+        </div>
+    </div>
+    <div class="subnav">
+        <button class="subnavbtn">branches <i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+            <a href="#add">add branch</a>
+            <a href="#delete">delete branch</a>
+            <a href="#checkout">checkout branch</a>
+            <a href="#reset">reset active branch</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="wrapper" style="display: inline-block;">
+<div class = label>
+    <h3 style = "color:white" >checkout: </h3>
+</div>
+<div class="box"  >
+
+    <select>
+    <option value="master">master</option>
+    <option value="active">active</option>
+
+</select>
+</div>
+</div>
+
+
+
+<button onclick="commitfunc" id="commitbtn" class="button button4">commit</button>
+<script>
+    var table = document.getElementById("table")
+    var commit = document.getElementById("commitbtn");
+    function commitfunc(){
+        var request = new XMLHttpRequest();
+        request.open("GET","/Servlets");
+        request.onload = function () {
+            var Data = JSON.parse(request.responseText);
+            changeHTML(Data);
+        }
+        request.send();
+    }
+    function changeHTML(data)
+    {
+        var htmlString = "<p> + commit succesfull </p>";
+        table.insertAdjacentHTML("beforeend",htmlString);
+    }
+</script>
+<button class="button button5">merge</button>
+
+<table id="table" align="right" >
+    <tr>
+        <th>branch</th>
+        <th>note</th>
+        <th>update date</th>
+        <th>sha-1</th>
+
+    </tr>
+    <tr>
+        <td>master</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>active</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+
+</table>
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'content')">content</button>
+    <button class="tablinks" onclick="openCity(event, 'files tree of the commit')">files tree of the commit</button>
+    <button class="tablinks" onclick="openCity(event, 'history of branch')">history of branch</button>
+    <button class="tablinks" onclick="openCity(event, 'delta')">delta</button>
+</div>
+
+<div id="content" class="tabcontent">
+    <h3>content</h3>
+    <p>here the content of the commit will be</p>
+</div>
+
+<div id="files tree of the commit" class="tabcontent">
+    <h3>files tree of the commit</h3>
+    <ul id="myUL">
+        <li><span class="caret">folder1</span>
+            <ul class="nested">
+                <li>file1</li>
+                <li>file2</li>
+                <li><span class="caret">folder2</span>
+                    <ul class="nested">
+                        <li>file3</li>
+                        <li>file4</li>
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+
+        for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function() {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            });
+        }
+    </script>
+</div>
+
+<div id="history of branch" class="tabcontent">
+    <h3>history of branch</h3>
+    <ul>
+        <li>commit1</li>
+        <li>commit2</li>
+
+    </ul>
+
+</div>
+<div id="delta" class="tabcontent">
+    <h3>delta</h3>
+    <div class="tab1">
+        <button class="tablinks1" onclick="openCity1(event, 'first commit')">first commit</button>
+        <button class="tablinks1" onclick="openCity1(event, 'second commit')">second commit</button>
+
+    </div>
+
+    <div id="content2" class="tabcontent1">
+        <li>change1</li>
+        <li>change2</li>
+    </div>
+        <div id="content3" class="tabcontent1">
+            <li>change1</li>
+            <li>change2</li>
+
+    </div>
+        <script>
+            function openCity1(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent1");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks1");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+        </script>
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+    }
+
+</script>
+</body>
+</html>
